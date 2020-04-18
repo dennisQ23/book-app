@@ -18,7 +18,7 @@ class BookCommentController extends Controller
     public function store(Request $request, $bookId)
     {
         $request->validate([
-            'book_id' => 'required',
+
             'comment' => 'required',
         ]);
 
@@ -26,6 +26,7 @@ class BookCommentController extends Controller
 
         $comment->book_id = $bookId;
         $comment->comment = $request->comment;
+        $comment->save();
 
         // success
         return redirect()
@@ -46,7 +47,18 @@ class BookCommentController extends Controller
      */
     public function update(Request $request, $bookId, $id)
     {
-        //
+        $request->validate([
+
+            'comment' => 'required',
+        ]);
+
+        $comment = Comment::findOrFail($id);
+        $comment->comment = $request->comment;
+        $comment->save();
+
+        return redirect()
+            ->action('BookController@show', $bookId)
+            ->with('message', '<div class="alert alert-success">Comment Updated</div>');
     }
 
     /**
@@ -58,6 +70,11 @@ class BookCommentController extends Controller
      */
     public function destroy($bookId, $id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        $comment->delete();
+
+        return redirect()
+            ->action('BookController@show', $bookId)
+            ->with('message', '<div class="alert alert-info">Comment Deleted</div>');
     }
 }

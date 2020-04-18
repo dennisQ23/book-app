@@ -12,6 +12,14 @@
             <small>{{ $comment->created_at->diffForHumans() }}</small>
         </div>
         <p>{{ $comment->comment }}</p>
+
+        <div class="clearfix">
+            <button class="edit-object btn btn-info btn-xs float-left">Edit</button>
+            @include('books.comments.partials.delete')
+        </div>
+        
+        @include('books.comments.partials.edit')
+        
     </li>
 @endforeach
 </ul>

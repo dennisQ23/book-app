@@ -57,6 +57,7 @@ class BookController extends Controller
         // set the book's data from the form data
         $book->title = $request->title;
         $book->description = $request->description;
+        $book->save();
 
         // create the new book in the database
         // if (!$book->save()) {
@@ -69,6 +70,7 @@ class BookController extends Controller
         //         ->with('errors', $errors)
         //         ->withInput();
         // }
+
         // success
         return redirect()
             ->action('BookController@index')
@@ -115,6 +117,7 @@ class BookController extends Controller
         // set the book's data from the form data
         $book->title = $request->title;
         $book->description = $request->description;
+        $book->save();
 
         // update the new book in the database
         // if (!$book->save()) {
@@ -127,6 +130,7 @@ class BookController extends Controller
         //         ->with('errors', $errors)
         //         ->withInput();
         // }
+
         // success
         return redirect()
             ->action('BookController@index')
