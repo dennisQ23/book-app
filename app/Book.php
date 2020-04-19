@@ -10,4 +10,9 @@ class Book extends Model
     {
         return $this->hasMany('App\Comment')->orderBy('created_at', 'desc');
     }
+
+    public function genres()
+    {
+        return $this->belongsToMany('App\Genre', 'books_genres');
+    }
 }

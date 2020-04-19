@@ -29,6 +29,7 @@ Route::get('books/{book}/edit', 'BookController@edit');
 Route::put('books/{book}', 'BookController@update');
 Route::post('books/store', 'BookController@store');
 Route::get('books/create', 'BookController@create');
+Route::get('books/search', 'BookController@search');
 Route::get('books/{book}', 'BookController@show');
 Route::get('books', 'BookController@index');
 
@@ -37,3 +38,5 @@ Route::resource(
     'BookCommentController',
     ['only' => ['store', 'update', 'destroy']]
 );
+
+Route::resource('genres', 'GenreController');
