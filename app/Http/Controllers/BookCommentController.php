@@ -32,8 +32,8 @@ class BookCommentController extends Controller
         return redirect()
             ->action('BookController@show', $bookId)
             ->with(
-                'message',
-                '<div class="alert alert-success">Comment Added</div>'
+                'success',
+                'Comment Added'
             );
     }
 
@@ -58,7 +58,7 @@ class BookCommentController extends Controller
 
         return redirect()
             ->action('BookController@show', $bookId)
-            ->with('message', '<div class="alert alert-success">Comment Updated</div>');
+            ->with('success', 'Comment Updated');
     }
 
     /**
@@ -75,6 +75,6 @@ class BookCommentController extends Controller
 
         return redirect()
             ->action('BookController@show', $bookId)
-            ->with('message', '<div class="alert alert-info">Comment Deleted</div>');
+            ->with('succes', 'Comment Deleted');
     }
 }

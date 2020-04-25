@@ -99,7 +99,7 @@ class BookController extends Controller
         // success
         return redirect()
             ->action('BookController@index')
-            ->with('message', '<div class="alert alert-success" role="alert">Book is created successfully!</div>');
+            ->with('success', 'Book is created successfully!');
     }
 
     /**
@@ -160,7 +160,7 @@ class BookController extends Controller
         // success
         return redirect()
             ->action('BookController@index')
-            ->with('message', '<div class="alert alert-success" role="alert">Book is updated successfully!</div>');
+            ->with('success', 'Book is updated successfully!');
     }
 
     /**
@@ -176,8 +176,8 @@ class BookController extends Controller
         return redirect()
             ->action('BookController@index')
             ->with(
-                'message',
-                '<div class="alert alert-info" role="alert">Book is deleted successfully!</div>'
+                'success',
+                'Book is deleted successfully!'
             );
     }
 }

@@ -6,7 +6,7 @@
 !!}
 
 <div class="input-group">
-    {{!! Form::text('q', Request::input('q'), ['class' => 'form-control', 'placeholder' => 'Search for...']) !!}}
+    {!! Form::text('q', Request::input('q'), ['class' => 'form-control', 'placeholder' => 'Search for...']) !!}@csrf
     <span class="input-group-btn">
         <button type="submit" class="btn btn-info">Go!</button>
     </span>
