@@ -5,6 +5,7 @@
 @section('content')
     <div class="font-weight-bold mt-5">
         <h1>Add a new book</h1>
+        <span class="float-right pb-2"><a href="/" class="btn btn-primary">Go Back</a></span>
     </div>
 
     @if (session('status'))

@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookCommentController extends Controller
 {
+    public function __construct()
+    {
+        // $this->middleware('auth', ['except' => ['index', 'search']]);
+        $this->middleware('auth', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -26,6 +32,7 @@ class BookCommentController extends Controller
 
         $comment->book_id = $bookId;
         $comment->comment = $request->comment;
+        $comment->user_id = Auth::user()->id;
         $comment->save();
 
         // success
@@ -53,6 +60,11 @@ class BookCommentController extends Controller
         ]);
 
         $comment = Comment::findOrFail($id);
+
+        if (!$comment->canEdit()) {
+            abort('403', 'Not authorized');
+        }
+
         $comment->comment = $request->comment;
         $comment->save();
 
@@ -71,6 +83,11 @@ class BookCommentController extends Controller
     public function destroy($bookId, $id)
     {
         $comment = Comment::findOrFail($id);
+
+        if (!$comment->canEdit()) {
+            abort('403', 'Not authorized');
+        }
+
         $comment->delete();
 
         return redirect()

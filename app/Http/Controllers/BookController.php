@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use App\Book;
 use App\Genre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
+    public function __construct()
+    {
+        // $this->middleware('auth', ['except' => ['index', 'search']]);
+        $this->middleware('auth', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +22,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::all();
+        $books = Book::orderBy('created_at', 'desc')->get();
         $data = array();
         $data['books'] = $books;
         $data['genres'] = Genre::all();
@@ -79,6 +86,7 @@ class BookController extends Controller
         // set the book's data from the form data
         $book->title = $request->title;
         $book->description = $request->description;
+        $book->user_id = Auth::user()->id;
 
         $book->save();
 
@@ -125,6 +133,11 @@ class BookController extends Controller
     public function edit($id)
     {
         $book = Book::findOrFail($id);
+
+        if (!$book->canEdit()) {
+            abort('403', 'Not authorized');
+        }
+
         $genres = Genre::get()->pluck('name', 'id');
         return view('books.edit', ['book' => $book, 'genres' => $genres]);
     }
@@ -138,6 +151,10 @@ class BookController extends Controller
     public function update(Request $request, $id)
     {
         $book = Book::findOrFail($id);
+
+        if (!$book->canEdit()) {
+            abort('403', 'Not authorized');
+        }
 
         // set the book's data from the form data
         $book->title = $request->title;
@@ -172,6 +189,11 @@ class BookController extends Controller
     public function destroy($id)
     {
         $book = Book::findOrFail($id);
+
+        if (!$book->canEdit()) {
+            abort('403', 'Not authorized');
+        }
+
         $book->delete();
         return redirect()
             ->action('BookController@index')

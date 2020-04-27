@@ -12,16 +12,16 @@
 */
 
 // use App\Http\Controllers\BookCommentController;
+
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'BookController@index');
 
-Route::get('welcome', function () {
-    return view('welcome');
-});
+// Route::get('welcome', function () {
+//     return view('welcome');
+// });
 
 Route::get('about', 'PageController@about');
 Route::get('contact', 'PageController@contact');
@@ -46,3 +46,6 @@ Route::resource('genres', 'GenreController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// user profile
+Route::get('profile', 'ProfileController@profile')->name('profile');
