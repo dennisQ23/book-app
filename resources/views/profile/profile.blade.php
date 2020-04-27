@@ -5,6 +5,23 @@
 @section('content')
     <div class="card card-header">
         <h1>My Profile</h1>
+
+        @if (Auth::user()->hasRole('member'))
+            <div class="alert alert-info">User is a member</div>
+        @endif
+
+        @if (Auth::user()->isAdmin())
+            <div class="alert alert-success">User is an Admin</div>
+        @endif
+
+        <h2>Roles</h2>
+        <ul>
+            @foreach (Auth::user()->roles as $role)
+                <li>{{ $role->name }}</li>
+            @endforeach
+        </ul>
+
+
         <h2>Submitted Books</h2>
         @include('books.partials.books', ['books' => $books])
 
