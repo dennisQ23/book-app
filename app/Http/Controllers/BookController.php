@@ -162,18 +162,6 @@ class BookController extends Controller
         $book->genres()->sync($request->genre_id);
         $book->save();
 
-        // update the new book in the database
-        // if (!$book->save()) {
-        //     $errors = $book->getErrors();
-
-        //     //redirect back to the edit page
-        //     // and pass along the errors
-        //     return redirect()
-        //         ->action('BookController@edit', $book->id)
-        //         ->with('errors', $errors)
-        //         ->withInput();
-        // }
-
         // success
         return redirect()
             ->action('BookController@index')

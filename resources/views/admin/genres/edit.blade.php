@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.admin')
 
 @section('title', 'Edit Genre')
 
@@ -20,11 +20,11 @@
 
     {!! Form::model($genre, ['route' => ['genres.update', $genre->id], 'method' => 'put']) !!}
     @csrf
-    @include('genres.partials.object_form')
+    @include('admin.genres.partials.object_form')
     {!! Form::submit('Update Genre', ['class' => 'btn btn-success']) !!}
 
     {!! Form::close() !!}
     
-    @include('genres.partials.delete_object')
+    @include('admin.genres.partials.delete_object')
     
 @endsection

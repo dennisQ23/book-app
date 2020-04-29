@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.admin')
 
 @section('title', 'Add a New Genre')
 
@@ -20,7 +20,7 @@
 
     {!! Form::model($genre, ['route' => 'genres.store']) !!}
     @csrf
-    @include('genres.partials.object_form')
+    @include('admin.genres.partials.object_form')
     {!! Form::submit('Add Genre', ['class' => 'btn btn-success']) !!}
 
     {!! Form::close() !!}

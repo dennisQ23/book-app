@@ -41,7 +41,7 @@ Route::resource(
     ['only' => ['store', 'update', 'destroy']]
 );
 
-Route::resource('genres', 'GenreController');
+Route::resource('genres', 'GenreController', ['only' => ['show']]);
 
 Auth::routes();
 
@@ -49,3 +49,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // user profile
 Route::get('profile', 'ProfileController@profile')->name('profile');
+
+// Admin only
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'admin'], function () {
+    Route::resource('users', 'UserController');
+    Route::resource('genres', 'GenreController', ['except' => ['show']]);
+});
