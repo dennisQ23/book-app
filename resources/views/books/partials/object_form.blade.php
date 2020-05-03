@@ -18,3 +18,10 @@
         ) 
     !!}
 </div>
+
+<div class="form-group">
+    {!! Form::label('status', 'Status') !!}
+    {!! Form::select('status', ['Planned to read', 'Started', 'Finished'], null, ['class' => 'form-control']
+        ) 
+    !!}
+</div>

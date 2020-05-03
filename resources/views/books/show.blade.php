@@ -9,6 +9,7 @@
     </div>
     
     <p><?php echo $book->description ?></p>
+    <P>{{ $book->status }}</P>
     <p>Book started on <?php echo $book->created_at ?></p>    
     
     @include('books.comments.partials.display')
