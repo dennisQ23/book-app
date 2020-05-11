@@ -86,6 +86,7 @@ class BookController extends Controller
         // set the book's data from the form data
         $book->title = $request->title;
         $book->description = $request->description;
+        $book->status = $request->status;
         $book->user_id = Auth::user()->id;
 
         $book->save();
@@ -159,6 +160,7 @@ class BookController extends Controller
         // set the book's data from the form data
         $book->title = $request->title;
         $book->description = $request->description;
+        $book->status = $request->status;
         $book->genres()->sync($request->genre_id);
         $book->save();
 
